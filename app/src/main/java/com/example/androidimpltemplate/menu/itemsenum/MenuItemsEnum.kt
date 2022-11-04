@@ -1,20 +1,25 @@
 package com.example.androidimpltemplate.menu.itemsenum
 
-enum class MenuItemsEnum(name: String) {
+import com.example.androidimpltemplate.base.BaseFragment
+import com.example.androidimpltemplate.ui.DownloadImageExampleFragment
+import com.example.androidimpltemplate.ui.RetrofitWithCoroutineExampleFragment
+
+enum class MenuItemsEnum(name: String? = null, fragmentInstance: BaseFragment<*>?=null, navId: Int? = null) {
 
     MAIN_ACTIVITY("Main Activity Example"),
-    EXAMPLE_FRAGMENT("Example Fragment"),
+    DOWNLOAD_IMAGE_EXAMPLE_FRAGMENT(name = "Download image example", fragmentInstance = DownloadImageExampleFragment.newInstance()),
+    RETROFIT_WITH_COROUTINE_EXAMPLE( fragmentInstance = RetrofitWithCoroutineExampleFragment.newInstance()),
     ;
 
 
-    private var mName: String? = null
+    val mName: String?
+    val mFragmentInstance: BaseFragment<*>?
+    val mNavId: Int?
 
     init {
         mName = name
-    }
-
-    fun getMenuItemName(): String? {
-        return mName
+        mFragmentInstance = fragmentInstance
+        mNavId =  navId
     }
 
 }

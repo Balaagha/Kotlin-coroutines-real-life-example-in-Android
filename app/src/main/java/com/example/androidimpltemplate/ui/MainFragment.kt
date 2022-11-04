@@ -6,4 +6,8 @@ import com.example.androidimpltemplate.databinding.FragmentMainBinding
 class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::inflate) {
     override fun setup() { }
 
+    companion object {
+        @JvmStatic
+        fun newInstance() = MainFragment()
+    }
 }
