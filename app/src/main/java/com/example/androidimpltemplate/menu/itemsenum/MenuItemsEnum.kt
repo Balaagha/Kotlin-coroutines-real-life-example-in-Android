@@ -2,7 +2,7 @@ package com.example.androidimpltemplate.menu.itemsenum
 
 import com.example.androidimpltemplate.base.BaseFragment
 import com.example.androidimpltemplate.ui.DownloadImageExampleFragment
-import com.example.androidimpltemplate.ui.RetrofitWithCoroutineExampleFragment
+import com.example.androidimpltemplate.ui.retrofitwithcoroutine.view.RetrofitWithCoroutineExampleFragment
 
 enum class MenuItemsEnum(name: String? = null, fragmentInstance: BaseFragment<*>?=null, navId: Int? = null) {
 
