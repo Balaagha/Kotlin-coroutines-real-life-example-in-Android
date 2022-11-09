@@ -2,6 +2,8 @@ package com.example.androidimpltemplate.ui
 
 import com.example.androidimpltemplate.base.BaseFragment
 import com.example.androidimpltemplate.databinding.FragmentFlowExamplesBinding
+import com.example.androidimpltemplate.utils.helper.log
+import com.example.androidimpltemplate.utils.helper.logI
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import kotlin.random.Random
@@ -17,11 +19,11 @@ class FlowExamplesFragment :
             createBasicFlow.setOnClickListener {
                 ensureAllJobCanceled {
                     CoroutineScope(Dispatchers.IO).launch {
-                        println("start numbers collection")
+                        "start numbers collection".logI()
                         generateNumbers().collect {
-                            println("number: $it")
+                            "number: $it".logI()
                         }
-                        println("finish numbers collection")
+                        log("finish numbers collection")
 
                         generateNumbersFromCollection().collect {
 
@@ -33,11 +35,11 @@ class FlowExamplesFragment :
             createCollectionFlow.setOnClickListener {
                 ensureAllJobCanceled {
                     CoroutineScope(Dispatchers.IO).launch {
-                        println("start numbers collection")
+                        log("start numbers collection")
                         generateNumbersFromCollection().collect {
-                            println("number: $it")
+                            log("number: $it")
                         }
-                        println("finish numbers collection")
+                        log("finish numbers collection")
                     }
                 }
             }
@@ -45,11 +47,11 @@ class FlowExamplesFragment :
             flowWithCancellation.setOnClickListener {
                 ensureAllJobCanceled {
                     CoroutineScope(Dispatchers.IO + CoroutineExceptionHandler { _, throwable ->
-                        println("Exception is ${throwable.localizedMessage}")
+                        log("Exception is ${throwable.localizedMessage}")
                     }).launch {
                         withTimeout(1000L) {
                             generateNumbers().collect {
-                                println("it -> $it")
+                                log("it -> $it")
                             }
                         }
                     }
@@ -69,7 +71,7 @@ class FlowExamplesFragment :
                             timeAndResponseList.add(Pair(time, factorialResult))
                         }
                         timeAndResponseList.forEach {
-                            println("time: ${it.first} | factorial result: ${it.second}")
+                            log("time: ${it.first} | factorial result: ${it.second}")
                         }
                     }
                 }
@@ -82,7 +84,7 @@ class FlowExamplesFragment :
             flowBufferExampleBtn.setOnClickListener {
                 ensureAllJobCanceled {
                     val withBuffer = Random.nextBoolean()
-                    println("it runs ${if (withBuffer) "with" else "without"} buffer")
+                    log("it runs ${if (withBuffer) "with" else "without"} buffer")
                     CoroutineScope(Dispatchers.IO).launch {
                         val measuredTime = measureTimeMillis {
                             generateNumbers(
@@ -95,11 +97,11 @@ class FlowExamplesFragment :
                                 }
                                 this.collect {
                                     delay(200)
-                                    println("collected number: $it")
+                                    log("collected number: $it")
                                 }
                             }
                         }
-                        println("elapsed time: $measuredTime")
+                        log("elapsed time: $measuredTime")
                     }
                 }
             }
@@ -116,7 +118,7 @@ class FlowExamplesFragment :
             delay(delayedTime)
             emit(i)
             if (isPrintEveryEmit) {
-                println("Emit $i in generateNumbers")
+                log("Emit $i in generateNumbers")
             }
         }
     }
@@ -128,7 +130,7 @@ class FlowExamplesFragment :
     // Example 3
     private suspend fun calculateFactorial(size: Int): Int {
         val factorial = (1..size).asFlow().reduce { accumulator, value -> accumulator * value }
-//        println("size: $size | factorial: $factorial ")
+//        log("size: $size | factorial: $factorial ")
         return factorial
     }
 
