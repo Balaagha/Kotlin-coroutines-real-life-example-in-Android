@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.ExampleFragment"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/createBasicFlow"
+        android:textStyle="bold"
+        android:text="Create basic flow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/createCollectionFlow"
+        android:textStyle="bold"
+        android:text="Create collection flow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/flowWithCancellation"
+        android:textStyle="bold"
+        android:text="Flow with cancellation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/flowReduceOperatorBtn"
+        android:textStyle="bold"
+        android:text="Reduce operator using"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/flowBufferExampleBtn"
+        android:textStyle="bold"
+        android:text="Buffer example"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+</LinearLayout>
