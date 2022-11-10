@@ -5,13 +5,17 @@ import com.example.androidimpltemplate.databinding.FragmentFlowExamplesBinding
 import com.example.androidimpltemplate.utils.helper.log
 import com.example.androidimpltemplate.utils.helper.logI
 import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlin.random.Random
 import kotlin.system.measureTimeMillis
 
 class FlowExamplesFragment :
     BaseFragment<FragmentFlowExamplesBinding>(FragmentFlowExamplesBinding::inflate) {
+
     val jobList = arrayListOf<Job>()
+
+    val channel: Channel<Int> = Channel<Int>()
 
     override fun setup() {
         binding.apply {
@@ -77,10 +81,6 @@ class FlowExamplesFragment :
                 }
             }
 
-        }
-
-
-        binding.apply {
             flowBufferExampleBtn.setOnClickListener {
                 ensureAllJobCanceled {
                     val withBuffer = Random.nextBoolean()
@@ -105,7 +105,19 @@ class FlowExamplesFragment :
                     }
                 }
             }
+
+            channelBasicExampleBtn.setOnClickListener {
+                CoroutineScope(Dispatchers.IO).launch {
+                    for (i in 1..10){
+                        channel.send(i)
+                    }
+                    for (i in 1..10){
+                        log(channel.receive().toString())
+                    }
+                }
+            }
         }
+
     }
 
     // Example 1
